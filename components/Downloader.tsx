@@ -201,7 +201,7 @@ export default function Downloader() {
         <>
           {result.title && <p className="video-title">{result.title}</p>}
           <p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "1rem" }}>
-            ⚠️ Download links expire quickly. Click download immediately after fetching.
+            ⚠️ Download links expire in 1-2 minutes. Click download immediately. If it fails, fetch the video again.
           </p>
           <div className="formats-grid">
             {result.formats
