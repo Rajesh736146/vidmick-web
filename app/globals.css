@@ -1,0 +1,224 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+p.subtitle { color: #888; margin-bottom: 2rem; }
+
+.platform-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.platform-tabs button {
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.15s;
+}
+
+.platform-tabs button.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-row input:focus { border-color: #555; }
+
+.input-row button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background: #e63946;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.input-row button:hover { background: #c1121f; }
+.input-row button:disabled { background: #555; cursor: not-allowed; }
+
+.error { color: #e63946; margin-bottom: 1rem; font-size: 0.9rem; }
+
+.video-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: #ddd;
+}
+
+.formats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.format-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+  gap: 1rem;
+}
+
+.format-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.format-quality { font-weight: 600; font-size: 0.95rem; }
+.format-meta { font-size: 0.8rem; color: #777; }
+
+.download-btn {
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  border: none;
+  background: #e63946;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.download-btn:hover { background: #c1121f; }
+
+.download-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #2a2a2a;
+  color: #aaa;
+  margin-left: 0.4rem;
+}
+
+.merge-badge { background: #1a3a2a; color: #4ade80; }
+
+.merge-progress {
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.steps-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.done {
+  opacity: 0.7;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  color: #777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.step.active .step-number {
+  background: #4ade80;
+  color: #000;
+}
+
+.step.done .step-number {
+  background: #2a5a3a;
+  color: #4ade80;
+}
+
+.step-label {
+  font-size: 0.7rem;
+  color: #777;
+  text-align: center;
+}
+
+.step.active .step-label {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.step-progress {
+  font-size: 0.65rem;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #2a2a2a;
+  border-radius: 999px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
