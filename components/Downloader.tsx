@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Platform, VideoResponse, FormatInfo } from "@/lib/types";
 import { useMerge, type MergeStep } from "@/lib/useMerge";
 
-const platforms: { id: Platform; label: string }[] = [
-  { id: "yt", label: "YouTube" },
-  { id: "insta", label: "Instagram" },
-  { id: "fb", label: "Facebook" },
+const platforms: { id: Platform; label: string; pattern: RegExp }[] = [
+  { id: "yt", label: "YouTube", pattern: /youtube\.com|youtu\.be/i },
+  { id: "insta", label: "Instagram", pattern: /instagram\.com/i },
+  { id: "fb", label: "Facebook", pattern: /facebook\.com|fb\.watch/i },
 ];
 
 function formatSize(bytes: number | null): string {
@@ -127,6 +127,18 @@ export default function Downloader() {
 
   const { merge, merging, currentStep, stepProgress, stepLabels } = useMerge();
 
+  // Auto-detect platform from URL
+  useEffect(() => {
+    if (!url.trim()) return;
+    
+    for (const p of platforms) {
+      if (p.pattern.test(url)) {
+        setPlatform(p.id);
+        break;
+      }
+    }
+  }, [url]);
+
   async function handleFetch() {
     if (!url.trim()) return;
     setLoading(true);
@@ -168,24 +180,21 @@ export default function Downloader() {
 
   const bestAudio = result ? getBestAudio(result.formats) : null;
 
+  // Filter formats based on platform
+  const filteredFormats = result?.formats.filter((f) => {
+    if (!f.has_video) return false;
+    // For YouTube, only show video+audio formats
+    if (platform === "yt") return f.has_audio;
+    // For Instagram/Facebook, show all video formats
+    return true;
+  }) ?? [];
+
   return (
     <>
-      <div className="platform-tabs">
-        {platforms.map((p) => (
-          <button
-            key={p.id}
-            className={platform === p.id ? "active" : ""}
-            onClick={() => { setPlatform(p.id); setResult(null); setError(""); }}
-          >
-            {p.label}
-          </button>
-        ))}
-      </div>
-
       <div className="input-row">
         <input
           type="url"
-          placeholder={`Paste ${platforms.find((p) => p.id === platform)?.label} video URL...`}
+          placeholder="Paste YouTube, Instagram, or Facebook video URL..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleFetch()}
@@ -204,15 +213,12 @@ export default function Downloader() {
             ⚠️ Download links expire in 1-2 minutes. Click download immediately. If it fails, fetch the video again.
           </p>
           <div className="formats-grid">
-            {result.formats
-              .filter((f) => f.has_video)
+            {filteredFormats
               .sort((a, b) => {
-                // Sort: video+audio first, then by resolution/quality
+                // Sort: video+audio first, then by resolution
                 const aHasBoth = a.has_video && a.has_audio ? 1 : 0;
                 const bHasBoth = b.has_video && b.has_audio ? 1 : 0;
                 if (aHasBoth !== bHasBoth) return bHasBoth - aHasBoth;
-                
-                // Then by height (resolution)
                 return (b.height ?? 0) - (a.height ?? 0);
               })
               .map((f, i) => (

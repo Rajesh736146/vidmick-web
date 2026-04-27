@@ -13,6 +13,12 @@ body {
   padding: 3rem 1.5rem;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+}
+
 h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
 p.subtitle { color: #888; margin-bottom: 2rem; }
 
@@ -99,6 +105,20 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
   border: 1px solid #2a2a2a;
   background: #1a1a1a;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .format-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+  
+  .download-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .format-info { display: flex; flex-direction: column; gap: 0.2rem; }
@@ -137,6 +157,7 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
 }
 
 .merge-badge { background: #1a3a2a; color: #4ade80; }
+.recommended-badge { background: #2a3a4a; color: #60a5fa; }
 
 .merge-progress {
   margin-top: 0.75rem;
