@@ -20,6 +20,7 @@ export interface FormatInfo {
 
 export interface VideoResponse {
   title: string | null;
+  thumbnail?: string | null;
   platform?: string;
   note?: string;
   extractor: string;

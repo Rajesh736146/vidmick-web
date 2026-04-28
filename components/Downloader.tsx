@@ -257,7 +257,16 @@ export default function Downloader() {
 
       {result && (
         <>
-          {result.title && <p className="video-title">{result.title}</p>}
+          <div className="video-info">
+            {result.thumbnail && (
+              <img
+                src={result.thumbnail}
+                alt={result.title ?? "Video thumbnail"}
+                className="video-thumbnail"
+              />
+            )}
+            {result.title && <p className="video-title">{result.title}</p>}
+          </div>
           <p className="info-message">
             ⚠️ Download links are valid for 1-2 minutes. Download immediately or click "Get Formats" again for fresh links.
           </p>
