@@ -105,9 +105,8 @@ function FormatCard({
       ) : f.download_url ? (
         <a 
           className="download-btn" 
-          href={f.download_url} 
+          href={`/api/proxy?url=${encodeURIComponent(f.download_url)}`}
           download={filename}
-          target="_blank" 
           rel="noopener noreferrer"
         >
           Download
