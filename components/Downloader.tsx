@@ -182,27 +182,12 @@ export default function Downloader() {
 
   // Filter formats based on platform
   const filteredFormats = result?.formats.filter((f) => {
-    // Show video formats
-    if (f.has_video) {
-      if (platform === "yt") {
-        // For YouTube: check file size
-        const fileSize = f.filesize ?? f.filesize_approx ?? 0;
-        const fileSizeMB = fileSize / (1024 * 1024);
-        
-        if (fileSizeMB > 50) {
-          // Over 50MB: only show video+audio formats
-          return f.has_audio;
-        } else {
-          // Under 50MB: show all video formats (including merge option)
-          return true;
-        }
-      }
-      // For Instagram/Facebook, show all video formats
-      return true;
+    if (platform === "yt") {
+      // YouTube: only video+audio or audio-only
+      return (f.has_video && f.has_audio) || (!f.has_video && f.has_audio);
     }
-    // Also show audio-only formats
-    if (f.has_audio && !f.has_video) return true;
-    return false;
+    // Instagram/Facebook: all video formats + audio-only
+    return f.has_video || f.has_audio;
   }) ?? [];
 
   return (
