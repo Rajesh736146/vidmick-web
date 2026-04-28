@@ -107,7 +107,7 @@ function FormatCard({
       ) : f.download_url ? (
         <a
           className="download-btn"
-          href={`/api/download?videoUrl=${encodeURIComponent(f.download_url)}&sourceUrl=${encodeURIComponent(url)}&platform=${platform}&formatId=${encodeURIComponent(f.format_id ?? "")}&filename=${encodeURIComponent(filename)}`}
+          href={`/api/download?videoUrl=${encodeURIComponent(f.download_url)}&sourceUrl=${encodeURIComponent(sourceUrl)}&platform=${platform}&formatId=${encodeURIComponent(f.format_id ?? "")}&filename=${encodeURIComponent(filename)}`}
           download={filename}
           rel="noopener noreferrer"
         >
