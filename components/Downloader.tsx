@@ -26,7 +26,7 @@ function getBestAudio(formats: FormatInfo[]): FormatInfo | null {
 }
 
 function FormatCard({
-  f, audioFormat, title, onMerge, activeMerge, currentStep, stepProgress, stepLabels,
+  f, audioFormat, title, onMerge, activeMerge, currentStep, stepProgress, stepLabels, sourceUrl, platform,
 }: {
   f: FormatInfo;
   audioFormat: FormatInfo | null;
@@ -36,6 +36,8 @@ function FormatCard({
   currentStep: MergeStep | null;
   stepProgress: number;
   stepLabels: Record<MergeStep, string>;
+  sourceUrl: string;
+  platform: Platform;
 }) {
   const size = formatSize(f.filesize ?? f.filesize_approx);
   const label = f.quality ?? f.resolution ?? f.format_id ?? "Unknown";
@@ -103,9 +105,9 @@ function FormatCard({
           {isThisMerging ? "Working..." : "Download"}
         </button>
       ) : f.download_url ? (
-        <a 
-          className="download-btn" 
-          href={`/api/proxy?url=${encodeURIComponent(f.download_url)}`}
+        <a
+          className="download-btn"
+          href={`/api/download?videoUrl=${encodeURIComponent(f.download_url)}&sourceUrl=${encodeURIComponent(url)}&platform=${platform}&formatId=${encodeURIComponent(f.format_id ?? "")}&filename=${encodeURIComponent(filename)}`}
           download={filename}
           rel="noopener noreferrer"
         >
@@ -299,6 +301,8 @@ export default function Downloader() {
                   currentStep={currentStep}
                   stepProgress={stepProgress}
                   stepLabels={stepLabels}
+                  sourceUrl={url}
+                  platform={platform}
                 />
               ))}
           </div>
