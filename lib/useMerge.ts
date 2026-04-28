@@ -25,9 +25,7 @@ export function useMerge() {
     const ff = new FFmpeg();
     const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
-    ff.on("progress", ({ progress: p }) => {
-      if (currentStep === 3) setStepProgress(Math.round(p * 100));
-    });
+    ff.on("progress", ({ progress: p }) => setStepProgress(Math.round(p * 100)));
     ff.on("log", ({ message }) => console.log("[ffmpeg]", message));
 
     await ff.load({
@@ -39,30 +37,33 @@ export function useMerge() {
     return ff;
   }
 
-  // Always use proxy to avoid CORS and URL expiration issues
-  async function fetchDirect(url: string, onProgress: (pct: number) => void): Promise<Uint8Array> {
-    console.log("[fetch] Fetching via proxy:", url.substring(0, 100));
-    
-    const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-    
-    try {
-      const res = await fetch(proxyUrl, { 
-        mode: "cors",
-        cache: "no-store",
-        credentials: "omit",
-      });
+  // Use /api/download which fetches fresh URL and streams from same server IP
+  async function fetchViaDownloadRoute(
+    params: {
+      videoUrl: string;
+      sourceUrl: string;
+      platform: string;
+      formatId: string;
+      filename: string;
+    },
+    onProgress: (pct: number) => void
+  ): Promise<Uint8Array> {
+    const qs = new URLSearchParams({
+      videoUrl: params.videoUrl,
+      sourceUrl: params.sourceUrl,
+      platform: params.platform,
+      formatId: params.formatId,
+      filename: params.filename,
+    });
 
-      if (!res.ok) {
-        const errorText = await res.text().catch(() => "");
-        console.error("[fetch] Proxy error:", res.status, errorText);
-        throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
-      }
+    const res = await fetch(`/api/download?${qs.toString()}`, { cache: "no-store" });
 
-      return await streamToArray(res, onProgress);
-    } catch (error: any) {
-      console.error("[fetch] Error:", error);
-      throw new Error(`Failed to download: ${error.message}`);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: res.statusText }));
+      throw new Error(err.error ?? `Download failed: ${res.status}`);
     }
+
+    return await streamToArray(res, onProgress);
   }
 
   async function streamToArray(res: Response, onProgress: (pct: number) => void): Promise<Uint8Array> {
@@ -80,7 +81,7 @@ export function useMerge() {
       if (total > 0) {
         onProgress(Math.round((received / total) * 100));
       } else {
-        onProgress(Math.min(99, Math.round((received / 10_000_000) * 100)));
+        onProgress(Math.min(99, Math.round((received / 50_000_000) * 100)));
       }
     }
 
@@ -93,58 +94,45 @@ export function useMerge() {
     return result;
   }
 
-  async function merge(videoUrl: string, audioUrl: string, filename: string): Promise<void> {
+  async function merge(
+    videoUrl: string,
+    audioUrl: string,
+    filename: string,
+    sourceUrl: string,
+    platform: string,
+    videoFormatId: string,
+    audioFormatId: string,
+  ): Promise<void> {
     try {
-      console.log("[merge] Starting merge for:", filename);
-      
-      // Download video and audio in parallel
       setCurrentStep(1);
       setStepProgress(0);
-      console.log("[merge] Step 1: Downloading");
 
       let videoProgress = 0;
       let audioProgress = 0;
 
       const [videoData, audioData] = await Promise.all([
-        fetchDirect(videoUrl, (p) => {
-          videoProgress = p;
-          const avg = Math.round((videoProgress + audioProgress) / 2);
-          console.log("[merge] Video:", p, "Audio:", audioProgress, "Avg:", avg);
-          setStepProgress(avg);
-        }),
-        fetchDirect(audioUrl, (p) => {
-          audioProgress = p;
-          const avg = Math.round((videoProgress + audioProgress) / 2);
-          console.log("[merge] Video:", videoProgress, "Audio:", p, "Avg:", avg);
-          setStepProgress(avg);
-        }),
+        fetchViaDownloadRoute(
+          { videoUrl, sourceUrl, platform, formatId: videoFormatId, filename: "video.mp4" },
+          (p) => { videoProgress = p; setStepProgress(Math.round((videoProgress + audioProgress) / 2)); }
+        ),
+        fetchViaDownloadRoute(
+          { videoUrl: audioUrl, sourceUrl, platform, formatId: audioFormatId, filename: "audio.mp4" },
+          (p) => { audioProgress = p; setStepProgress(Math.round((videoProgress + audioProgress) / 2)); }
+        ),
       ]);
 
-      console.log("[merge] Downloads complete");
-
-      // Step 3: Merge and save
       setCurrentStep(3);
       setStepProgress(0);
-      console.log("[merge] Step 3: Merging");
 
       const ff = await getFFmpeg();
       await ff.writeFile("video.mp4", videoData);
       await ff.writeFile("audio.mp4", audioData);
 
-      await ff.exec([
-        "-i", "video.mp4",
-        "-i", "audio.mp4",
-        "-c:v", "copy",
-        "-c:a", "aac",
-        "-shortest",
-        "output.mp4",
-      ]);
+      await ff.exec(["-i", "video.mp4", "-i", "audio.mp4", "-c:v", "copy", "-c:a", "aac", "-shortest", "output.mp4"]);
 
       const data = await ff.readFile("output.mp4");
-      const uint8Data = new Uint8Array(data as Uint8Array);
-      const blob = new Blob([uint8Data], { type: "video/mp4" });
+      const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: "video/mp4" });
       const blobUrl = URL.createObjectURL(blob);
-
       const a = document.createElement("a");
       a.href = blobUrl;
       a.download = filename;

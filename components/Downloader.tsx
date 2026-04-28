@@ -31,7 +31,7 @@ function FormatCard({
   f: FormatInfo;
   audioFormat: FormatInfo | null;
   title: string | null;
-  onMerge: (videoUrl: string, audioUrl: string, filename: string) => void;
+  onMerge: (videoUrl: string, audioUrl: string, filename: string, videoFormatId: string, audioFormatId: string) => void;
   activeMerge: string | null;
   currentStep: MergeStep | null;
   stepProgress: number;
@@ -98,7 +98,7 @@ function FormatCard({
             e.stopPropagation();
             if (!activeMerge) {
               console.log("[UI] Merge button clicked for:", filename);
-              onMerge(f.download_url!, audioFormat.download_url!, filename);
+              onMerge(f.download_url!, audioFormat.download_url!, filename, f.format_id ?? "", audioFormat.format_id ?? "");
             }
           }}
         >
@@ -165,49 +165,14 @@ export default function Downloader() {
     }
   }
 
-  async function handleMerge(videoUrl: string, audioUrl: string, filename: string) {
+  async function handleMerge(videoUrl: string, audioUrl: string, filename: string, videoFormatId: string, audioFormatId: string) {
     if (activeMerge) return;
-    
-    // Refresh URLs before merging to avoid expiration
-    console.log("[handleMerge] Refreshing URLs...");
     setActiveMerge(filename);
-    
     try {
-      // Fetch fresh formats
-      const res = await fetch("/api/formats", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: url.trim(), platform }),
-      });
-      const freshData = await res.json();
-      
-      if (!res.ok) {
-        throw new Error("Failed to refresh download URLs");
-      }
-      
-      // Find the same format in fresh data by format_id
-      const originalFormatId = result?.formats.find(
-        (f: FormatInfo) => f.download_url === videoUrl
-      )?.format_id;
-
-      const freshVideoFormat = freshData.formats.find((f: FormatInfo) => 
-        originalFormatId ? f.format_id === originalFormatId : f.download_url === videoUrl
-      );
-      const freshAudioFormat = getBestAudio(freshData.formats);
-
-      const finalVideoUrl = freshVideoFormat?.download_url ?? videoUrl;
-      const finalAudioUrl = freshAudioFormat?.download_url ?? audioUrl;
-
-      if (!finalVideoUrl || !finalAudioUrl) {
-        throw new Error("Could not find fresh download URLs");
-      }
-
-      console.log("[handleMerge] Using fresh URLs");
-      await merge(finalVideoUrl, finalAudioUrl, filename);
-      console.log("[handleMerge] Success!");
+      await merge(videoUrl, audioUrl, filename, url.trim(), platform, videoFormatId, audioFormatId);
     } catch (e: any) {
       console.error("[handleMerge] Error:", e);
-      alert(`Merge failed: ${e?.message ?? "Unknown error"}\n\nTry fetching the video again.`);
+      alert(`Merge failed: ${e?.message ?? "Unknown error"}`);
     } finally {
       setActiveMerge(null);
     }
