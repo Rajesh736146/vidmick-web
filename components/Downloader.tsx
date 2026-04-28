@@ -212,7 +212,7 @@ export default function Downloader() {
           <div className="video-info">
             {result.thumbnail && (
               <img
-                src={result.thumbnail}
+                src={`/api/proxy?url=${encodeURIComponent(result.thumbnail)}`}
                 alt={result.title ?? "Video thumbnail"}
                 className="video-thumbnail"
               />
