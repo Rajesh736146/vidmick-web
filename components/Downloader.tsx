@@ -183,18 +183,25 @@ export default function Downloader() {
         throw new Error("Failed to refresh download URLs");
       }
       
-      // Find the same format in fresh data
+      // Find the same format in fresh data by format_id
+      const originalFormatId = result?.formats.find(
+        (f: FormatInfo) => f.download_url === videoUrl
+      )?.format_id;
+
       const freshVideoFormat = freshData.formats.find((f: FormatInfo) => 
-        f.format_id === videoUrl.split('/').pop()?.split('?')[0] || f.download_url === videoUrl
+        originalFormatId ? f.format_id === originalFormatId : f.download_url === videoUrl
       );
       const freshAudioFormat = getBestAudio(freshData.formats);
-      
-      if (!freshVideoFormat?.download_url || !freshAudioFormat?.download_url) {
+
+      const finalVideoUrl = freshVideoFormat?.download_url ?? videoUrl;
+      const finalAudioUrl = freshAudioFormat?.download_url ?? audioUrl;
+
+      if (!finalVideoUrl || !finalAudioUrl) {
         throw new Error("Could not find fresh download URLs");
       }
-      
+
       console.log("[handleMerge] Using fresh URLs");
-      await merge(freshVideoFormat.download_url, freshAudioFormat.download_url, filename);
+      await merge(finalVideoUrl, finalAudioUrl, filename);
       console.log("[handleMerge] Success!");
     } catch (e: any) {
       console.error("[handleMerge] Error:", e);
