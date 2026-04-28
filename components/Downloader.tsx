@@ -184,8 +184,19 @@ export default function Downloader() {
   const filteredFormats = result?.formats.filter((f) => {
     // Show video formats
     if (f.has_video) {
-      // For YouTube, only show video+audio formats
-      if (platform === "yt") return f.has_audio;
+      if (platform === "yt") {
+        // For YouTube: check file size
+        const fileSize = f.filesize ?? f.filesize_approx ?? 0;
+        const fileSizeMB = fileSize / (1024 * 1024);
+        
+        if (fileSizeMB > 50) {
+          // Over 50MB: only show video+audio formats
+          return f.has_audio;
+        } else {
+          // Under 50MB: show all video formats (including merge option)
+          return true;
+        }
+      }
       // For Instagram/Facebook, show all video formats
       return true;
     }
