@@ -1,14 +1,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #0f0f0f;
-  color: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #2d3748;
   min-height: 100vh;
 }
 
 .container {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
 }
@@ -19,100 +19,145 @@ body {
   }
 }
 
-h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-p.subtitle { color: #888; margin-bottom: 2rem; }
-
-.platform-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+h1 { 
+  font-size: 2.5rem; 
+  font-weight: 800; 
+  margin-bottom: 0.75rem;
+  color: #fff;
+  text-align: center;
 }
 
-.platform-tabs button {
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  border: 1px solid #333;
-  background: transparent;
-  color: #aaa;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.15s;
+p.subtitle { 
+  color: rgba(255, 255, 255, 0.9); 
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-size: 1.1rem;
 }
 
-.platform-tabs button.active {
+.input-section {
   background: #fff;
-  color: #000;
-  border-color: #fff;
-  font-weight: 600;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
 }
 
 .input-row {
   display: flex;
   gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .input-row {
+    flex-direction: column;
+  }
 }
 
 .input-row input {
   flex: 1;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #1a1a1a;
-  color: #f0f0f0;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  background: #f7fafc;
+  color: #2d3748;
   font-size: 1rem;
   outline: none;
+  transition: all 0.2s;
 }
 
-.input-row input:focus { border-color: #555; }
+.input-row input:focus { 
+  border-color: #667eea;
+  background: #fff;
+}
+
+.input-row input::placeholder {
+  color: #a0aec0;
+}
 
 .input-row button {
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  border-radius: 12px;
   border: none;
-  background: #e63946;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: transform 0.2s, box-shadow 0.2s;
   white-space: nowrap;
 }
 
-.input-row button:hover { background: #c1121f; }
-.input-row button:disabled { background: #555; cursor: not-allowed; }
+.input-row button:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
 
-.error { color: #e63946; margin-bottom: 1rem; font-size: 0.9rem; }
+.input-row button:disabled { 
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error { 
+  color: #e53e3e;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  text-align: center;
+  background: #fff5f5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 4px solid #e53e3e;
+}
 
 .video-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  color: #ddd;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.info-message {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.875rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-left: 4px solid #f6ad55;
 }
 
 .formats-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .format-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 1.25rem;
-  border-radius: 10px;
-  border: 1px solid #2a2a2a;
-  background: #1a1a1a;
-  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  gap: 1.25rem;
   flex-wrap: wrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.format-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 640px) {
   .format-card {
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem;
+    padding: 1.25rem;
   }
   
   .download-btn {
@@ -121,53 +166,83 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
   }
 }
 
-.format-info { display: flex; flex-direction: column; gap: 0.2rem; }
-.format-quality { font-weight: 600; font-size: 0.95rem; }
-.format-meta { font-size: 0.8rem; color: #777; }
+.format-info { 
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.format-quality { 
+  font-weight: 700;
+  font-size: 1rem;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.format-meta { 
+  font-size: 0.875rem;
+  color: #718096;
+}
 
 .download-btn {
-  padding: 0.5rem 1.1rem;
-  border-radius: 7px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
   border: none;
-  background: #e63946;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.15s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
 }
 
-.download-btn:hover { background: #c1121f; }
+.download-btn:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
 
 .download-btn:disabled {
-  background: #555;
+  background: #cbd5e0;
   cursor: not-allowed;
+  transform: none;
   opacity: 0.6;
 }
 
 .badge {
   font-size: 0.7rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: #2a2a2a;
-  color: #aaa;
-  margin-left: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: #edf2f7;
+  color: #4a5568;
+  font-weight: 600;
 }
 
-.merge-badge { background: #1a3a2a; color: #4ade80; }
-.recommended-badge { background: #2a3a4a; color: #60a5fa; }
+.merge-badge { 
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.recommended-badge { 
+  background: #bee3f8;
+  color: #2c5282;
+}
 
 .merge-progress {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   width: 100%;
 }
 
 .steps-container {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .step {
@@ -175,7 +250,7 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
   opacity: 0.4;
   transition: opacity 0.2s;
 }
@@ -189,49 +264,50 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
 }
 
 .step-number {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #2a2a2a;
-  color: #777;
+  background: #e2e8f0;
+  color: #718096;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
   transition: all 0.2s;
 }
 
 .step.active .step-number {
-  background: #4ade80;
-  color: #000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
 }
 
 .step.done .step-number {
-  background: #2a5a3a;
-  color: #4ade80;
+  background: #48bb78;
+  color: #fff;
 }
 
 .step-label {
-  font-size: 0.7rem;
-  color: #777;
+  font-size: 0.75rem;
+  color: #718096;
   text-align: center;
+  font-weight: 500;
 }
 
 .step.active .step-label {
-  color: #4ade80;
+  color: #667eea;
   font-weight: 600;
 }
 
 .step-progress {
-  font-size: 0.65rem;
-  color: #4ade80;
-  font-weight: 600;
+  font-size: 0.7rem;
+  color: #667eea;
+  font-weight: 700;
 }
 
 .progress-bar {
-  height: 6px;
-  background: #2a2a2a;
+  height: 8px;
+  background: #e2e8f0;
   border-radius: 999px;
   overflow: hidden;
   width: 100%;
@@ -239,7 +315,7 @@ p.subtitle { color: #888; margin-bottom: 2rem; }
 
 .progress-fill {
   height: 100%;
-  background: #4ade80;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   border-radius: 999px;
-  transition: width 0.25s ease;
+  transition: width 0.3s ease;
 }
