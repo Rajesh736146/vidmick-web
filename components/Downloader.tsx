@@ -124,6 +124,7 @@ export default function Downloader() {
   const [error, setError] = useState("");
   const [result, setResult] = useState<VideoResponse | null>(null);
   const [activeMerge, setActiveMerge] = useState<string | null>(null);
+  const [fetchTime, setFetchTime] = useState<number | null>(null);
 
   const { merge, merging, currentStep, stepProgress, stepLabels } = useMerge();
 
@@ -152,7 +153,10 @@ export default function Downloader() {
       });
       const data = await res.json();
       if (!res.ok) setError(data?.error ?? "Something went wrong.");
-      else setResult(data);
+      else {
+        setResult(data);
+        setFetchTime(Date.now());
+      }
     } catch {
       setError("Network error. Please try again.");
     } finally {
@@ -162,17 +166,40 @@ export default function Downloader() {
 
   async function handleMerge(videoUrl: string, audioUrl: string, filename: string) {
     if (activeMerge) return;
-    console.log("[handleMerge] Starting:", filename);
-    console.log("[handleMerge] Video URL:", videoUrl.substring(0, 100));
-    console.log("[handleMerge] Audio URL:", audioUrl.substring(0, 100));
     
+    // Refresh URLs before merging to avoid expiration
+    console.log("[handleMerge] Refreshing URLs...");
     setActiveMerge(filename);
+    
     try {
-      await merge(videoUrl, audioUrl, filename);
+      // Fetch fresh formats
+      const res = await fetch("/api/formats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: url.trim(), platform }),
+      });
+      const freshData = await res.json();
+      
+      if (!res.ok) {
+        throw new Error("Failed to refresh download URLs");
+      }
+      
+      // Find the same format in fresh data
+      const freshVideoFormat = freshData.formats.find((f: FormatInfo) => 
+        f.format_id === videoUrl.split('/').pop()?.split('?')[0] || f.download_url === videoUrl
+      );
+      const freshAudioFormat = getBestAudio(freshData.formats);
+      
+      if (!freshVideoFormat?.download_url || !freshAudioFormat?.download_url) {
+        throw new Error("Could not find fresh download URLs");
+      }
+      
+      console.log("[handleMerge] Using fresh URLs");
+      await merge(freshVideoFormat.download_url, freshAudioFormat.download_url, filename);
       console.log("[handleMerge] Success!");
     } catch (e: any) {
       console.error("[handleMerge] Error:", e);
-      alert(`Merge failed: ${e?.message ?? "Unknown error"}\n\nThe download URLs may have expired. Try fetching the video again.`);
+      alert(`Merge failed: ${e?.message ?? "Unknown error"}\n\nTry fetching the video again.`);
     } finally {
       setActiveMerge(null);
     }
@@ -226,7 +253,7 @@ export default function Downloader() {
         <>
           {result.title && <p className="video-title">{result.title}</p>}
           <p className="info-message">
-            ⚠️ Download links expire in 1-2 minutes. Click download immediately. If it fails, fetch the video again.
+            ⚠️ Download links are valid for 1-2 minutes. Download immediately or click "Get Formats" again for fresh links.
           </p>
           <div className="formats-grid">
             {filteredFormats
