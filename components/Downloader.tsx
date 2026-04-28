@@ -182,11 +182,16 @@ export default function Downloader() {
 
   // Filter formats based on platform
   const filteredFormats = result?.formats.filter((f) => {
-    if (!f.has_video) return false;
-    // For YouTube, only show video+audio formats
-    if (platform === "yt") return f.has_audio;
-    // For Instagram/Facebook, show all video formats
-    return true;
+    // Show video formats
+    if (f.has_video) {
+      // For YouTube, only show video+audio formats
+      if (platform === "yt") return f.has_audio;
+      // For Instagram/Facebook, show all video formats
+      return true;
+    }
+    // Also show audio-only formats
+    if (f.has_audio && !f.has_video) return true;
+    return false;
   }) ?? [];
 
   return (
@@ -215,11 +220,20 @@ export default function Downloader() {
           <div className="formats-grid">
             {filteredFormats
               .sort((a, b) => {
-                // Sort: video+audio first, then by resolution
-                const aHasBoth = a.has_video && a.has_audio ? 1 : 0;
-                const bHasBoth = b.has_video && b.has_audio ? 1 : 0;
-                if (aHasBoth !== bHasBoth) return bHasBoth - aHasBoth;
-                return (b.height ?? 0) - (a.height ?? 0);
+                // Video formats first, audio formats last
+                if (a.has_video && !b.has_video) return -1;
+                if (!a.has_video && b.has_video) return 1;
+                
+                // Among videos: video+audio first, then by resolution
+                if (a.has_video && b.has_video) {
+                  const aHasBoth = a.has_audio ? 1 : 0;
+                  const bHasBoth = b.has_audio ? 1 : 0;
+                  if (aHasBoth !== bHasBoth) return bHasBoth - aHasBoth;
+                  return (b.height ?? 0) - (a.height ?? 0);
+                }
+                
+                // Among audio: sort by filesize
+                return (b.filesize ?? b.filesize_approx ?? 0) - (a.filesize ?? a.filesize_approx ?? 0);
               })
               .map((f, i) => (
                 <FormatCard
