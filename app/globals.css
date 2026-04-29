@@ -61,7 +61,7 @@ body {
 .input-row button {
   padding: 1.1rem 2rem;
   border: none;
-  background: #e63946;
+  background: #2563eb;
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
@@ -70,7 +70,7 @@ body {
   white-space: nowrap;
 }
 
-.input-row button:hover { background: #c1121f; }
+.input-row button:hover { background: #1d4ed8; }
 .input-row button:disabled { background: #94a3b8; cursor: not-allowed; }
 
 @media (max-width: 540px) {
