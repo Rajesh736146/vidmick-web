@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "VidMic – Download Videos from YouTube, Instagram & Facebook",
+  title: "VidMick – Download Videos from YouTube, Instagram & Facebook",
   description:
-    "Free online video downloader. Paste any YouTube, Instagram, or Facebook video URL and download in your preferred quality.",
+    "Free online video downloader. Download HD videos from YouTube, Instagram, and Facebook. No software needed. Fast, free, and unlimited.",
   openGraph: {
-    title: "VidMic – Video Downloader",
+    title: "VidMick – Video Downloader",
     description: "Download videos from YouTube, Instagram & Facebook for free.",
     type: "website",
   },

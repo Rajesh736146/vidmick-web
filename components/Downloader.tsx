@@ -208,7 +208,7 @@ export default function Downloader() {
       {error && <p className="error">{error}</p>}
 
       {result && (
-        <>
+        <div className="results-section">
           <div className="video-info">
             {result.thumbnail && (
               <img
@@ -256,7 +256,7 @@ export default function Downloader() {
                 />
               ))}
           </div>
-        </>
+        </div>
       )}
     </>
   );
