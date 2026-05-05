@@ -47,6 +47,12 @@ export default function Home() {
         <div className="input-section">
           <Downloader />
         </div>
+        <div className="apk-banner">
+          <span className="apk-banner-text">📱 Get the Android App</span>
+          <a href="/vidmick.apk" download className="apk-download-btn">
+            ⬇ Download APK
+          </a>
+        </div>
       </section>
 
       <div className="main-content">

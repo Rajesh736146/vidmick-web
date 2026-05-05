@@ -361,3 +361,34 @@ footer {
 footer a { color: #94a3b8; text-decoration: none; margin: 0 0.75rem; }
 footer a:hover { color: #fff; }
 .footer-links { margin-bottom: 1rem; }
+
+/* ── APK BANNER ── */
+.apk-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.apk-banner-text {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.apk-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  background: #16a34a;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.apk-download-btn:hover { background: #15803d; }
