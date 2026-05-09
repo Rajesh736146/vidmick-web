@@ -219,9 +219,6 @@ export default function Downloader() {
             )}
             {result.title && <p className="video-title">{result.title}</p>}
           </div>
-          <p className="info-message">
-            ⚠️ Download links are valid for 1-2 minutes. Download immediately or click "Get Formats" again for fresh links.
-          </p>
           <div className="formats-grid">
             {filteredFormats
               .sort((a, b) => {
