@@ -42,7 +42,7 @@ function FormatCard({
   const size = formatSize(f.filesize ?? f.filesize_approx);
   const label = f.quality ?? f.resolution ?? f.format_id ?? "Unknown";
   const needsMerge = f.has_video && !f.has_audio;
-  const type = f.has_video && f.has_audio ? "Video+Audio" : f.has_video ? "Video only" : "Audio only";
+  const type = f.has_video && f.has_audio ? "Video" : f.has_video ? "Video only" : "Audio only";
   const filename = `${title ?? "video"}_${label}_${f.format_id ?? f.ext}.mp4`;
   const isThisMerging = activeMerge === filename;
 
