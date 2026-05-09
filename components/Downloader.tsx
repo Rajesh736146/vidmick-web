@@ -201,7 +201,7 @@ export default function Downloader() {
           onKeyDown={(e) => e.key === "Enter" && handleFetch()}
         />
         <button onClick={handleFetch} disabled={loading || !url.trim()}>
-          {loading ? "Fetching..." : "Get Formats"}
+          {loading ? <span className="spinner" /> : "Get Formats"}
         </button>
       </div>
 

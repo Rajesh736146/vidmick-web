@@ -1,11 +1,37 @@
 import type { Metadata } from "next";
 import Downloader from "@/components/Downloader";
 import FaqItem from "@/components/FaqItem";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "VidMick – Download Videos from YouTube, Instagram & Facebook",
+  title: "VidMick – Free Online Video Downloader for YouTube, Instagram & Facebook",
   description:
-    "Free online video downloader. Download HD videos from YouTube, Instagram, and Facebook. No software needed. Fast, free, and unlimited.",
+    "Download videos from YouTube, Instagram, and Facebook for free. Save HD, 1080p, 4K videos and MP3 audio instantly. No login, no software, works on all devices.",
+  keywords: [
+    "video downloader",
+    "youtube video downloader",
+    "instagram video downloader",
+    "facebook video downloader",
+    "download youtube videos free",
+    "instagram reels downloader",
+    "youtube shorts downloader",
+    "online video downloader",
+    "free video downloader",
+    "HD video downloader",
+  ],
+  alternates: { canonical: "https://vidmic.app" },
+  openGraph: {
+    title: "VidMick – Free Online Video Downloader",
+    description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
+    type: "website",
+    url: "https://vidmic.app",
+    siteName: "VidMick",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VidMick – Free Online Video Downloader",
+    description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
+  },
 };
 
 const faqs = [
@@ -19,7 +45,7 @@ const faqs = [
   },
   {
     q: "What video quality options are available?",
-    a: "Available qualities depend on the original video. We show all available formats including HD, Full HD, and audio-only options.",
+    a: "Available qualities depend on the original video. We show all available formats including HD, Full HD, 4K, and audio-only options.",
   },
   {
     q: "Do I need to create an account?",
@@ -35,14 +61,56 @@ const faqs = [
   },
 ];
 
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "VidMick",
+  url: "https://vidmic.app",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "All",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description:
+    "Free online video downloader. Download HD videos from YouTube, Instagram, and Facebook. No software needed.",
+  featureList: [
+    "Download YouTube videos in HD, 1080p, 4K",
+    "Download Instagram Reels and videos",
+    "Download Facebook videos and Reels",
+    "Audio-only MP3 downloads",
+    "No login or registration required",
+    "Works on Android, iPhone, and desktop",
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmic.app" },
+  ],
+};
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={webAppSchema} />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
+
       {/* Hero */}
       <section className="hero">
-        <h1>Download Videos Online</h1>
+        <h1>Free Online Video Downloader</h1>
         <p className="subtitle">
-          YouTube · Instagram · Facebook — HD quality, free, no software needed
+          Download videos from YouTube, Instagram &amp; Facebook — HD, 1080p, 4K, free, no login
         </p>
         <div className="input-section">
           <Downloader />
@@ -56,6 +124,19 @@ export default function Home() {
       </section>
 
       <div className="main-content">
+
+        {/* Platform links */}
+        <div className="platform-links">
+          <a href="/youtube-downloader" className="platform-link yt">
+            <span>▶</span> YouTube Downloader
+          </a>
+          <a href="/instagram-downloader" className="platform-link ig">
+            <span>📷</span> Instagram Downloader
+          </a>
+          <a href="/facebook-downloader" className="platform-link fb">
+            <span>f</span> Facebook Downloader
+          </a>
+        </div>
 
         {/* How to */}
         <h2 className="section-title">How to Download Videos</h2>
@@ -80,7 +161,7 @@ export default function Home() {
 
         {/* Features */}
         <h2 className="section-title">Why Use VidMick?</h2>
-        <p className="section-subtitle">Everything you need in a video downloader</p>
+        <p className="section-subtitle">Everything you need in a free video downloader</p>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon">⚡</div>
@@ -90,7 +171,7 @@ export default function Home() {
           <div className="feature-card">
             <div className="feature-icon">🎯</div>
             <h3>Multiple Formats</h3>
-            <p>Choose from all available resolutions including HD, Full HD, and audio-only MP3.</p>
+            <p>Choose from all available resolutions including HD, Full HD, 4K, and audio-only MP3.</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">📱</div>
@@ -99,7 +180,7 @@ export default function Home() {
           </div>
           <div className="feature-card">
             <div className="feature-icon">🔒</div>
-            <h3>Safe & Private</h3>
+            <h3>Safe &amp; Private</h3>
             <p>We don't store your URLs or downloaded files. Everything stays between you and the platform.</p>
           </div>
           <div className="feature-card">
@@ -113,6 +194,20 @@ export default function Home() {
             <p>VidMick is and will always be free to use. No premium tiers or paywalls.</p>
           </div>
         </div>
+
+        {/* SEO content block */}
+        <section className="content-section">
+          <h2 className="section-title">Download Videos from Any Platform</h2>
+          <p className="content-text">
+            VidMick is a free online video downloader that lets you save videos from YouTube, Instagram, and Facebook directly to your device — no software installation, no browser extension, and no account required.
+          </p>
+          <p className="content-text">
+            Whether you want to download a <a href="/youtube-downloader">YouTube video</a> in 4K, save an <a href="/instagram-downloader">Instagram Reel</a> without a watermark, or grab a <a href="/facebook-downloader">Facebook video</a> for offline viewing, VidMick handles it all in seconds. Just paste the URL, pick your quality, and download.
+          </p>
+          <p className="content-text">
+            VidMick supports YouTube Shorts, YouTube videos, Instagram Reels, Instagram posts, Facebook Reels, Facebook videos, and Facebook Live recordings. It works on Android, iPhone, Windows, Mac, and Linux — any device with a modern browser.
+          </p>
+        </section>
 
         {/* FAQ */}
         <h2 className="section-title">Frequently Asked Questions</h2>
@@ -128,10 +223,11 @@ export default function Home() {
       {/* Footer */}
       <footer>
         <div className="footer-links">
-          <a href="#">Home</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Contact</a>
+          <a href="/">Home</a>
+          <a href="/youtube-downloader">YouTube Downloader</a>
+          <a href="/instagram-downloader">Instagram Downloader</a>
+          <a href="/facebook-downloader">Facebook Downloader</a>
+          <a href="/how-to-download-videos">How To</a>
         </div>
         <p>© {new Date().getFullYear()} VidMick. All rights reserved. VidMick is not affiliated with YouTube, Instagram, or Facebook.</p>
       </footer>

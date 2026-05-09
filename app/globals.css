@@ -392,3 +392,242 @@ footer a:hover { color: #fff; }
 }
 
 .apk-download-btn:hover { background: #15803d; }
+
+/* ── SPINNER ── */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── NAV ── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 2rem;
+  background: #0f172a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #1e293b;
+}
+
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: #fff; }
+
+@media (max-width: 540px) {
+  .site-nav { padding: 0.75rem 1rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links a { font-size: 0.8rem; }
+}
+
+/* ── CONTENT PAGES ── */
+.content-section {
+  margin-top: 3rem;
+}
+
+.content-text {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  max-width: 720px;
+}
+
+.content-text.lead {
+  font-size: 1.1rem;
+  color: #334155;
+}
+
+.subsection-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 2rem 0 0.6rem;
+}
+
+/* ── ARTICLE / HOW-TO ── */
+.article-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.guide-list {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #475569;
+  line-height: 2;
+}
+
+.guide-list li { margin-bottom: 0.4rem; }
+.guide-list a { color: #2563eb; text-decoration: underline; }
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.tip-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.tip-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.tip-card p {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* ── CTA BOX ── */
+.cta-box {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.cta-box h2 {
+  color: #fff;
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.cta-box p {
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.cta-btn:hover { background: #1d4ed8; }
+
+/* ── PLATFORM LINKS ── */
+.platform-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.5rem 0;
+}
+
+.platform-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.platform-link:hover { opacity: 0.85; transform: translateY(-1px); }
+.platform-link.yt  { background: #ff0000; color: #fff; }
+.platform-link.ig  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+.platform-link.fb  { background: #1877f2; color: #fff; }
+
+/* ── RELATED LINKS ── */
+.related-links {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.related-links h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.related-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.related-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.1);
+}
+
+.related-card span {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.related-card strong {
+  display: block;
+  color: #1a1a2e;
+  font-size: 0.95rem;
+}
+
+.related-card p {
+  color: #64748b;
+  font-size: 0.82rem;
+  margin-top: 0.15rem;
+}
