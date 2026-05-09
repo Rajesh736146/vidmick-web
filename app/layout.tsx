@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
   },
   alternates: { canonical: "https://vidmic.app" },
+  verification: { google: "Vh2nyJuyt21kR633-sVPCmMqpg2s8FfhAdHvq14LyOU" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
