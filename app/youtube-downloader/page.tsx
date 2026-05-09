@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     "online youtube downloader",
     "youtube downloader no login",
   ],
-  alternates: { canonical: "https://vidmic.app/youtube-downloader" },
+  alternates: { canonical: "https://vidmick.com/youtube-downloader" },
   openGraph: {
     title: "YouTube Video Downloader – Free HD, 4K & MP3 Downloads | VidMick",
     description: "Save YouTube videos in any quality — HD, 1080p, 4K, or MP3 audio. Free, fast, no account needed.",
     type: "website",
-    url: "https://vidmic.app/youtube-downloader",
+    url: "https://vidmick.com/youtube-downloader",
     siteName: "VidMick",
   },
   twitter: {
@@ -71,7 +71,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "VidMick YouTube Downloader",
-  url: "https://vidmic.app/youtube-downloader",
+  url: "https://vidmick.com/youtube-downloader",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "All",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -99,8 +99,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmic.app" },
-    { "@type": "ListItem", position: 2, name: "YouTube Downloader", item: "https://vidmic.app/youtube-downloader" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
+    { "@type": "ListItem", position: 2, name: "YouTube Downloader", item: "https://vidmick.com/youtube-downloader" },
   ],
 };
 

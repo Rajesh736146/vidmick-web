@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     "facebook video downloader android",
     "facebook video downloader iphone",
   ],
-  alternates: { canonical: "https://vidmic.app/facebook-downloader" },
+  alternates: { canonical: "https://vidmick.com/facebook-downloader" },
   openGraph: {
     title: "Facebook Video Downloader – Save FB Videos & Reels Free | VidMick",
     description: "Download public Facebook videos and Reels in HD. Free, fast, no account required.",
     type: "website",
-    url: "https://vidmic.app/facebook-downloader",
+    url: "https://vidmick.com/facebook-downloader",
     siteName: "VidMick",
   },
   twitter: {
@@ -71,7 +71,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "VidMick Facebook Downloader",
-  url: "https://vidmic.app/facebook-downloader",
+  url: "https://vidmick.com/facebook-downloader",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "All",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -99,8 +99,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmic.app" },
-    { "@type": "ListItem", position: 2, name: "Facebook Downloader", item: "https://vidmic.app/facebook-downloader" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
+    { "@type": "ListItem", position: 2, name: "Facebook Downloader", item: "https://vidmick.com/facebook-downloader" },
   ],
 };
 

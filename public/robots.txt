@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vidmic.app/sitemap.xml
+Sitemap: https://vidmick.com/sitemap.xml

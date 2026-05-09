@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     "instagram video downloader android",
     "instagram video downloader iphone",
   ],
-  alternates: { canonical: "https://vidmic.app/instagram-downloader" },
+  alternates: { canonical: "https://vidmick.com/instagram-downloader" },
   openGraph: {
     title: "Instagram Video Downloader – Save Reels Without Watermark | VidMick",
     description: "Download Instagram Reels and videos in HD quality. Free, fast, no account required.",
     type: "website",
-    url: "https://vidmic.app/instagram-downloader",
+    url: "https://vidmick.com/instagram-downloader",
     siteName: "VidMick",
   },
   twitter: {
@@ -71,7 +71,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "VidMick Instagram Downloader",
-  url: "https://vidmic.app/instagram-downloader",
+  url: "https://vidmick.com/instagram-downloader",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "All",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -99,8 +99,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmic.app" },
-    { "@type": "ListItem", position: 2, name: "Instagram Downloader", item: "https://vidmic.app/instagram-downloader" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
+    { "@type": "ListItem", position: 2, name: "Instagram Downloader", item: "https://vidmick.com/instagram-downloader" },
   ],
 };
 

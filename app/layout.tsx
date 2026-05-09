@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "VidMick – Free Online Video Downloader for YouTube, Instagram & Facebook",
   description:
     "Download videos from YouTube, Instagram, and Facebook for free. Save HD, 1080p, 4K videos and MP3 audio instantly. No login, no software, works on all devices.",
-  metadataBase: new URL("https://vidmic.app"),
+  metadataBase: new URL("https://vidmick.com"),
   openGraph: {
     title: "VidMick – Free Online Video Downloader",
     description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
     type: "website",
-    url: "https://vidmic.app",
+    url: "https://vidmick.com",
     siteName: "VidMick",
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "VidMick – Free Online Video Downloader",
     description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
   },
-  alternates: { canonical: "https://vidmic.app" },
+  alternates: { canonical: "https://vidmick.com" },
   verification: { google: "Vh2nyJuyt21kR633-sVPCmMqpg2s8FfhAdHvq14LyOU" },
 };
 

@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "How to Download Videos from YouTube, Instagram & Facebook | VidMick",
   description:
     "Step-by-step guide to downloading videos from YouTube, Instagram, and Facebook for free. Learn how to save HD videos to any device using VidMick.",
-  alternates: { canonical: "https://vidmic.app/how-to-download-videos" },
+  alternates: { canonical: "https://vidmick.com/how-to-download-videos" },
   openGraph: {
     title: "How to Download Videos Online – Complete Guide | VidMick",
     description: "Learn how to download videos from YouTube, Instagram, and Facebook in HD. Free, no software needed.",
     type: "article",
-    url: "https://vidmic.app/how-to-download-videos",
+    url: "https://vidmick.com/how-to-download-videos",
   },
 };
 

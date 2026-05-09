@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "free video downloader",
     "HD video downloader",
   ],
-  alternates: { canonical: "https://vidmic.app" },
+  alternates: { canonical: "https://vidmick.com" },
   openGraph: {
     title: "VidMick – Free Online Video Downloader",
     description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
     type: "website",
-    url: "https://vidmic.app",
+    url: "https://vidmick.com",
     siteName: "VidMick",
   },
   twitter: {
@@ -65,7 +65,7 @@ const webAppSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: "VidMick",
-  url: "https://vidmic.app",
+  url: "https://vidmick.com",
   applicationCategory: "MultimediaApplication",
   operatingSystem: "All",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -95,7 +95,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmic.app" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
   ],
 };
 
