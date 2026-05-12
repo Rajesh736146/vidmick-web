@@ -7,11 +7,24 @@ body {
   min-height: 100vh;
 }
 
+/* If custom web fonts are added later, keep swap behavior to reduce CLS. */
+@font-face {
+  font-family: "System UI";
+  src: local("Segoe UI"), local("San Francisco"), local("Roboto");
+  font-display: swap;
+}
+
 /* ── HERO ── */
 .hero {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
   padding: 3.5rem 1.5rem 4rem;
   text-align: center;
+}
+
+.hero-logo {
+  margin: 0 auto 1.2rem;
+  width: auto;
+  height: auto;
 }
 
 .hero h1 {
@@ -96,6 +109,7 @@ body {
 .video-thumbnail {
   width: 100%;
   max-width: 480px;
+  height: auto;
   border-radius: 14px;
   object-fit: cover;
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
@@ -261,6 +275,30 @@ body {
   font-size: 1rem;
 }
 
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+  margin-bottom: 1.5rem;
+  color: #64748b;
+}
+
+.breadcrumb-item a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-sep {
+  margin: 0 0.2rem;
+  color: #94a3b8;
+}
+
 /* ── HOW TO ── */
 .steps-how {
   display: grid;
@@ -315,6 +353,29 @@ body {
 .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
 .feature-card h3 { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
 .feature-card p { font-size: 0.875rem; color: #64748b; line-height: 1.6; }
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trust-card h3 {
+  font-size: 1.05rem;
+}
+
+.updated-note {
+  margin-top: 1rem;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
 /* ── FAQ ── */
 .faq-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4rem; }
@@ -577,6 +638,7 @@ footer a:hover { color: #fff; }
 .platform-link.yt  { background: #ff0000; color: #fff; }
 .platform-link.ig  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
 .platform-link.fb  { background: #1877f2; color: #fff; }
+.platform-link.tk  { background: #111827; color: #fff; }
 
 /* ── RELATED LINKS ── */
 .related-links {
@@ -630,4 +692,44 @@ footer a:hover { color: #fff; }
   color: #64748b;
   font-size: 0.82rem;
   margin-top: 0.15rem;
+}
+
+.platform-cards {
+  margin-top: 1rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.2rem;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 660px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.8rem 0.9rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.comparison-table th {
+  background: #f8fafc;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-grid {
+  margin-top: 1.5rem;
 }

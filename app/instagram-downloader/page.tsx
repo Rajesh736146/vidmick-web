@@ -2,108 +2,103 @@ import type { Metadata } from "next";
 import Downloader from "@/components/Downloader";
 import FaqItem from "@/components/FaqItem";
 import JsonLd from "@/components/JsonLd";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
+import RelatedDownloaders from "@/components/RelatedDownloaders";
+import SiteFooter from "@/components/SiteFooter";
+import { defaultOgImage, withCanonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Instagram Video Downloader – Download Reels, Videos & IGTV Free | VidMick",
+  title: "Instagram Video Downloader — Save Reels Without Watermark | VidMick",
   description:
-    "Download Instagram Reels, videos, and IGTV in HD for free. No login needed. Save Instagram videos without watermark instantly — works on Android & iPhone.",
+    "Download Instagram Reels, videos, and posts in HD without watermark. Free, no login, works on iPhone & Android. Paste the Instagram URL and save instantly.",
   keywords: [
     "instagram video downloader",
     "instagram reels downloader",
-    "download instagram reels",
-    "save instagram video",
-    "instagram reel download online",
-    "instagram video download without watermark",
-    "download instagram video free",
-    "instagram downloader online",
-    "instagram reels save",
-    "igtv downloader",
-    "instagram video downloader android",
-    "instagram video downloader iphone",
-    "how to download instagram reels",
+    "download instagram reels without watermark",
+    "save instagram reel",
+    "instagram downloader",
+    "download instagram video",
     "instagram reel downloader no watermark",
-    "save instagram reel to phone",
-    "download instagram video to gallery",
-    "instagram video download hd",
-    "instagram post video downloader",
-    "download reels from instagram online",
-    "instagram video saver",
-    "free instagram downloader",
-    "instagram downloader no login",
-    "download instagram video 2024",
-    "best instagram reels downloader",
+    "instagram reels downloader online",
+    "instagram video downloader iphone",
+    "instagram video downloader android",
+    "instagram downloader 2026",
   ],
-  alternates: { canonical: "https://vidmick.com/instagram-downloader" },
+  ...withCanonical("/instagram-downloader"),
   openGraph: {
-    title: "Instagram Video Downloader – Save Reels Without Watermark | VidMick",
-    description: "Download Instagram Reels and videos in HD quality. Free, fast, no account required.",
-    type: "website",
+    title: "Instagram Video Downloader — Save Reels Without Watermark | VidMick",
+    description: "Download Instagram Reels, posts, and videos in HD without watermark. Free and fast.",
     url: "https://vidmick.com/instagram-downloader",
     siteName: "VidMick",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Instagram Reels Downloader – Free HD Downloads | VidMick",
-    description: "Save Instagram Reels and videos without watermark. Free, no login required.",
+    type: "website",
+    images: defaultOgImage(
+      "https://vidmick.com/og-instagram.png",
+      "Instagram Reels Downloader — No Watermark | VidMick",
+    ),
   },
 };
 
 const faqs = [
   {
-    q: "How do I download an Instagram Reel?",
-    a: "Open the Reel on Instagram, tap the three-dot menu (⋯) and select 'Copy Link'. Paste that link into VidMick above and click 'Get Formats', then choose your quality and download.",
+    q: "Can I download Instagram Reels without a watermark?",
+    a: "Yes. VidMick downloads Instagram Reels directly from the source without adding any watermark.",
   },
   {
-    q: "Can I download Instagram Reels without a watermark?",
-    a: "Yes. VidMick downloads Instagram Reels directly from Instagram's servers at their original quality with no watermark added. The file you get is the original video.",
+    q: "Does VidMick support Instagram Stories and IGTV?",
+    a: "VidMick supports Instagram Reels, video posts, and IGTV. Stories support depends on the privacy settings of the account.",
   },
   {
     q: "Can I download private Instagram videos?",
-    a: "VidMick can only download publicly available Instagram content. Private account videos require you to be logged in on Instagram and are not accessible via public URLs.",
+    a: "VidMick can only download publicly accessible Instagram content. Private account videos require the account owner's permission to access.",
   },
   {
-    q: "Does VidMick support Instagram Stories?",
-    a: "Instagram Stories are only accessible while they are live and require authentication. VidMick works best with public posts, Reels, and IGTV videos.",
-  },
-  {
-    q: "What quality are Instagram Reel downloads?",
-    a: "VidMick downloads Instagram videos at the highest quality Instagram provides, typically up to 1080p for Reels and standard posts.",
-  },
-  {
-    q: "How do I save an Instagram video on iPhone?",
-    a: "On iPhone, tap the Download button in Safari, then long-press and select 'Download Linked File'. The video will save to your Files app. You can then move it to your Photos app.",
-  },
-  {
-    q: "How do I save an Instagram Reel on Android?",
-    a: "On Android, tap the Download button in your browser. The video will save to your Downloads folder and should appear in your gallery app automatically.",
+    q: "How do I download Instagram Reels on iPhone?",
+    a: "Open the Reel on Instagram, tap Share → Copy Link. Go to VidMick in Safari, paste the URL, click Get Formats, then long-press Download and select Download Linked File.",
   },
 ];
 
-const webAppSchema = {
+const howToSchema = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "VidMick Instagram Downloader",
-  url: "https://vidmick.com/instagram-downloader",
-  applicationCategory: "MultimediaApplication",
-  operatingSystem: "All",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  description: "Free Instagram video downloader. Download Instagram Reels and videos in HD without watermark. No login required.",
-  featureList: [
-    "Download Instagram Reels without watermark",
-    "Download Instagram videos in HD",
-    "Download IGTV videos",
-    "No login or registration required",
-    "Works on Android, iPhone, and desktop",
+  "@type": "HowTo",
+  name: "How to Download Instagram Videos and Reels with VidMick",
+  description: "Save Instagram Reels, videos, and posts in HD without watermark using VidMick.",
+  totalTime: "PT1M",
+  tool: [{ "@type": "HowToTool", name: "VidMick" }],
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Copy the Instagram URL",
+      text: "Open Instagram, go to the Reel or video post, tap the three-dot menu and select Copy Link.",
+      url: "https://vidmick.com/instagram-downloader#step1",
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Paste into VidMick",
+      text: "Paste the Instagram URL into the VidMick input box and click Get Formats.",
+      url: "https://vidmick.com/instagram-downloader#step2",
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Download the video",
+      text: "Click Download. The Instagram video or Reel saves directly to your device without a watermark.",
+      url: "https://vidmick.com/instagram-downloader#step3",
+    },
   ],
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
+  mainEntity: faqs.map((faq) => ({
     "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
   })),
 };
 
@@ -111,113 +106,101 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
-    { "@type": "ListItem", position: 2, name: "Instagram Downloader", item: "https://vidmick.com/instagram-downloader" },
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://vidmick.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Instagram Downloader",
+      item: "https://vidmick.com/instagram-downloader",
+    },
   ],
 };
 
 export default function InstagramDownloaderPage() {
   return (
     <>
-      <JsonLd data={webAppSchema} />
+      <JsonLd data={howToSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
 
       <section className="hero">
         <h1>Instagram Video Downloader</h1>
-        <p className="subtitle">
-          Download Instagram Reels &amp; videos without watermark — free, HD, no login needed
-        </p>
+        <p className="subtitle">Download Instagram Reels and videos in HD without watermark, no login required.</p>
         <div className="input-section">
           <Downloader />
         </div>
       </section>
 
       <div className="main-content">
-        <h2 className="section-title">How to Download Instagram Reels &amp; Videos</h2>
-        <p className="section-subtitle">Save any Instagram Reel or video in seconds</p>
+        <BreadcrumbNav items={[{ label: "Home", href: "/" }, { label: "Instagram Downloader" }]} />
+
+        <h2 className="section-title">How to Download Instagram Reels and Videos</h2>
         <div className="steps-how">
-          <div className="step-how">
+          <div className="step-how" id="step1">
             <div className="step-how-num">1</div>
-            <h3>Copy the Instagram link</h3>
-            <p>Open the Instagram post or Reel, tap the three-dot menu (⋯) and select "Copy Link". On desktop, copy the URL from the address bar.</p>
+            <h3>Copy the Instagram URL</h3>
+            <p>Open Instagram, tap the 3-dot menu on a Reel or video post, then copy the link.</p>
           </div>
-          <div className="step-how">
+          <div className="step-how" id="step2">
             <div className="step-how-num">2</div>
             <h3>Paste into VidMick</h3>
-            <p>Paste the Instagram URL into the input above and click "Get Formats". VidMick will detect the video and show available download options.</p>
+            <p>Paste the link into the input box and click Get Formats to fetch quality options.</p>
           </div>
-          <div className="step-how">
+          <div className="step-how" id="step3">
             <div className="step-how-num">3</div>
-            <h3>Download in HD</h3>
-            <p>Choose your preferred quality and click Download. The video saves directly to your phone or computer — no watermark, no compression.</p>
+            <h3>Download instantly</h3>
+            <p>Click Download to save the video directly to your device at original quality.</p>
           </div>
         </div>
 
         <section className="content-section">
-          <h2 className="section-title">Save Instagram Reels Without Watermark</h2>
+          <h2 className="section-title">Save Instagram Reels in Original Quality</h2>
           <p className="content-text">
-            VidMick downloads Instagram Reels and videos directly from Instagram's servers at their original quality — no watermarks, no compression, no re-encoding. What you download is exactly what Instagram hosts, typically up to 1080p HD.
+            VidMick focuses on public Instagram content and returns clean direct formats for Reels, posts, and IGTV. No account sign-in is required for public links.
+          </p>
+          <h3 className="subsection-title">Looking for Reels-only instructions?</h3>
+          <p className="content-text">
+            If you want a dedicated workflow specifically for Reels, including phone-specific steps, visit our dedicated page: <a href="/instagram-reels-downloader">Instagram Reels Downloader</a>.
           </p>
           <p className="content-text">
-            Whether it's a viral Reel, a cooking tutorial, a travel video, or a fitness clip, VidMick makes it easy to save Instagram content to your device for offline viewing. Works on Android, iPhone, and all desktop browsers.
-          </p>
-
-          <h3 className="subsection-title">Download Instagram Reels on Android</h3>
-          <p className="content-text">
-            Open your Android browser, paste the Instagram Reel URL into VidMick, and tap Download. The video saves to your Downloads folder and appears in your gallery automatically. No app installation needed.
-          </p>
-
-          <h3 className="subsection-title">Download Instagram Reels on iPhone</h3>
-          <p className="content-text">
-            On iPhone, use Safari to open VidMick. After clicking Download, long-press the button and select "Download Linked File" to save the Reel to your Files app. From there you can move it to your Photos library.
-          </p>
-
-          <h3 className="subsection-title">Download Instagram IGTV Videos</h3>
-          <p className="content-text">
-            IGTV long-form videos are fully supported. Paste the IGTV URL into VidMick and download the full video in the best available resolution.
+            Private account content is not accessible unless you have explicit access permission from the account owner.
           </p>
         </section>
 
         <h2 className="section-title">Frequently Asked Questions</h2>
-        <p className="section-subtitle">Everything about downloading Instagram Reels and videos</p>
         <div className="faq-list">
-          {faqs.map((faq, i) => (
-            <FaqItem key={i} question={faq.q} answer={faq.a} />
+          {faqs.map((faq) => (
+            <FaqItem key={faq.q} question={faq.q} answer={faq.a} />
           ))}
         </div>
 
-        <div className="related-links">
-          <h3>Also Download From</h3>
-          <div className="related-grid">
-            <a href="/youtube-downloader" className="related-card">
-              <span>▶</span>
-              <div>
-                <strong>YouTube Downloader</strong>
-                <p>Save videos &amp; Shorts in 4K</p>
-              </div>
-            </a>
-            <a href="/facebook-downloader" className="related-card">
-              <span>f</span>
-              <div>
-                <strong>Facebook Downloader</strong>
-                <p>Save FB videos &amp; Reels</p>
-              </div>
-            </a>
-          </div>
-        </div>
+        <RelatedDownloaders
+          links={[
+            {
+              href: "/youtube-downloader",
+              label: "YouTube Downloader",
+              description: "Download YouTube videos, Shorts, and MP3 audio.",
+            },
+            {
+              href: "/facebook-downloader",
+              label: "Facebook Downloader",
+              description: "Save Facebook videos and Reels in HD.",
+            },
+            {
+              href: "/tiktok-downloader",
+              label: "TikTok Downloader",
+              description: "Download TikTok videos without watermark.",
+            },
+          ]}
+        />
       </div>
 
-      <footer>
-        <div className="footer-links">
-          <a href="/">Home</a>
-          <a href="/youtube-downloader">YouTube Downloader</a>
-          <a href="/instagram-downloader">Instagram Downloader</a>
-          <a href="/facebook-downloader">Facebook Downloader</a>
-          <a href="/how-to-download-videos">How To</a>
-        </div>
-        <p>© {new Date().getFullYear()} VidMick. All rights reserved.</p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

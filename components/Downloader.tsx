@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import type { Platform, VideoResponse, FormatInfo } from "@/lib/types";
 import { useMerge, type MergeStep } from "@/lib/useMerge";
 
@@ -211,10 +212,14 @@ export default function Downloader() {
         <div className="results-section">
           <div className="video-info">
             {result.thumbnail && (
-              <img
+              <Image
                 src={`/api/proxy?url=${encodeURIComponent(result.thumbnail)}`}
                 alt={result.title ?? "Video thumbnail"}
                 className="video-thumbnail"
+                width={1280}
+                height={720}
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 480px"
               />
             )}
             {result.title && <p className="video-title">{result.title}</p>}

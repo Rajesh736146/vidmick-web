@@ -1,24 +1,29 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { defaultOgImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "VidMick – Free Online Video Downloader for YouTube, Instagram & Facebook",
-  description:
-    "Download videos from YouTube, Instagram, and Facebook for free. Save HD, 1080p, 4K videos and MP3 audio instantly. No login, no software, works on all devices.",
   metadataBase: new URL("https://vidmick.com"),
+  title: "VidMick — Free Video Downloader for YouTube, Instagram & Facebook",
+  description:
+    "Download YouTube, Instagram & Facebook videos free. HD, 1080p, 4K, MP3 audio. No login, no software, no limits. Works on Android, iPhone & desktop.",
   openGraph: {
-    title: "VidMick – Free Online Video Downloader",
-    description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
+    title: "VidMick — Free Video Downloader for YouTube, Instagram & Facebook",
+    description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login. Works on all devices.",
     type: "website",
-    url: "https://vidmick.com",
+    url: "https://vidmick.com/",
     siteName: "VidMick",
+    images: defaultOgImage(),
   },
   twitter: {
     card: "summary_large_image",
-    title: "VidMick – Free Online Video Downloader",
-    description: "Download HD videos from YouTube, Instagram & Facebook. Free, fast, no login needed.",
+    title: "VidMick — Free Video Downloader",
+    description: "Download HD videos from YouTube, Instagram & Facebook. Free, no login.",
+    images: ["https://vidmick.com/og-image.png"],
   },
-  alternates: { canonical: "https://vidmick.com" },
+  alternates: {
+    canonical: "https://vidmick.com/",
+  },
   verification: { google: "Vh2nyJuyt21kR633-sVPCmMqpg2s8FfhAdHvq14LyOU" },
 };
 
@@ -32,7 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/youtube-downloader">YouTube</a>
             <a href="/instagram-downloader">Instagram</a>
             <a href="/facebook-downloader">Facebook</a>
-            <a href="/how-to-download-videos">How To</a>
+            <a href="/tiktok-downloader">TikTok</a>
+            <a href="/blog">Blog</a>
           </div>
         </nav>
         {children}

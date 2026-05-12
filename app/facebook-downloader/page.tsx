@@ -2,108 +2,90 @@ import type { Metadata } from "next";
 import Downloader from "@/components/Downloader";
 import FaqItem from "@/components/FaqItem";
 import JsonLd from "@/components/JsonLd";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
+import RelatedDownloaders from "@/components/RelatedDownloaders";
+import SiteFooter from "@/components/SiteFooter";
+import { defaultOgImage, withCanonical } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Facebook Video Downloader – Download FB Videos & Reels Free | VidMick",
+  title: "Facebook Video Downloader — Save FB Videos & Reels Free | VidMick",
   description:
-    "Download Facebook videos and Reels in HD for free. Save public FB videos to your device instantly. No login, no software — paste the URL and download now.",
+    "Download Facebook videos, Reels, and Live recordings in HD for free. No login, no software. Paste any Facebook video URL and download instantly.",
   keywords: [
     "facebook video downloader",
     "download facebook videos",
     "facebook reels downloader",
-    "download facebook reels",
-    "fb video downloader online",
+    "facebook video download online",
     "save facebook video",
-    "facebook video download free",
-    "facebook video downloader hd",
-    "download fb video online",
-    "facebook live video downloader",
-    "facebook video downloader android",
-    "facebook video downloader iphone",
-    "how to download facebook videos",
-    "facebook video saver online",
+    "facebook downloader free",
+    "facebook live downloader",
     "download facebook video to phone",
-    "fb reel downloader",
-    "facebook video download without login",
-    "save facebook reel",
-    "download public facebook video",
-    "facebook video downloader no software",
-    "best facebook video downloader",
-    "free facebook downloader",
-    "download facebook video 2024",
-    "facebook mp4 downloader",
+    "facebook video downloader online free 2026",
   ],
-  alternates: { canonical: "https://vidmick.com/facebook-downloader" },
+  ...withCanonical("/facebook-downloader"),
   openGraph: {
-    title: "Facebook Video Downloader – Save FB Videos & Reels Free | VidMick",
-    description: "Download public Facebook videos and Reels in HD. Free, fast, no account required.",
-    type: "website",
+    title: "Facebook Video Downloader — Save FB Videos & Reels Free | VidMick",
+    description: "Download Facebook videos, Reels, and Live recordings in HD for free.",
     url: "https://vidmick.com/facebook-downloader",
     siteName: "VidMick",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Facebook Video Downloader – Free HD Downloads | VidMick",
-    description: "Download Facebook videos and Reels in HD. Free, no login required.",
+    type: "website",
+    images: defaultOgImage(),
   },
 };
 
 const faqs = [
   {
-    q: "How do I copy a Facebook video link?",
-    a: "On desktop, click the timestamp of the post to open it on its own page and copy the URL from the address bar. On mobile, tap the three-dot menu on the post and select 'Copy link'.",
+    q: "Can I download Facebook Live recordings?",
+    a: "Yes, VidMick supports downloading Facebook Live recordings after the stream has ended, as long as the video is publicly accessible.",
   },
   {
-    q: "How do I download a Facebook video online?",
-    a: "Copy the Facebook video URL, paste it into VidMick above, and click 'Get Formats'. Select your preferred quality (SD or HD) and click Download. The video saves directly to your device.",
+    q: "Why can't I download some Facebook videos?",
+    a: "Videos set to Friends Only or Private on Facebook cannot be downloaded by third-party tools. Only publicly shared videos are accessible.",
   },
   {
-    q: "Can I download private Facebook videos?",
-    a: "VidMick only works with publicly accessible Facebook videos. Videos set to 'Friends only' or 'Private' cannot be downloaded without authentication.",
-  },
-  {
-    q: "Does VidMick support Facebook Reels?",
-    a: "Yes. Facebook Reels are fully supported. Copy the Reel URL and paste it into VidMick to download in HD.",
-  },
-  {
-    q: "What video quality is available for Facebook downloads?",
-    a: "Facebook typically provides SD and HD versions of videos. VidMick will show all available options so you can choose the quality that suits you.",
-  },
-  {
-    q: "Can I download Facebook Live videos?",
-    a: "Facebook Live recordings that are saved as public posts can be downloaded with VidMick after the stream has ended. Just copy the post URL and paste it in.",
-  },
-  {
-    q: "Does VidMick work for downloading Facebook videos on mobile?",
-    a: "Yes. VidMick works in any mobile browser on Android and iPhone. No app installation is required to download Facebook videos.",
+    q: "Can I download Facebook Reels?",
+    a: "Yes. Facebook Reels are supported. Paste the Reel URL into VidMick and download in the available quality.",
   },
 ];
 
-const webAppSchema = {
+const howToSchema = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "VidMick Facebook Downloader",
-  url: "https://vidmick.com/facebook-downloader",
-  applicationCategory: "MultimediaApplication",
-  operatingSystem: "All",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  description: "Free Facebook video downloader. Download public Facebook videos and Reels in HD. No login required.",
-  featureList: [
-    "Download Facebook videos in HD",
-    "Download Facebook Reels",
-    "Download Facebook Live recordings",
-    "No login or registration required",
-    "Works on Android, iPhone, and desktop",
+  "@type": "HowTo",
+  name: "How to Download Facebook Videos with VidMick",
+  description: "Download Facebook videos, Reels, and Live recordings for free using VidMick.",
+  totalTime: "PT1M",
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Copy the Facebook video URL",
+      text: "Open Facebook, click the three-dot menu on the video and select Copy Link, or copy the URL from your browser address bar.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Paste into VidMick and fetch formats",
+      text: "Paste the URL into VidMick and click Get Formats to see available quality options.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Download",
+      text: "Select your preferred quality and click Download. The video saves directly to your device.",
+    },
   ],
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
+  mainEntity: faqs.map((faq) => ({
     "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
   })),
 };
 
@@ -111,113 +93,97 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://vidmick.com" },
-    { "@type": "ListItem", position: 2, name: "Facebook Downloader", item: "https://vidmick.com/facebook-downloader" },
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://vidmick.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Facebook Downloader",
+      item: "https://vidmick.com/facebook-downloader",
+    },
   ],
 };
 
 export default function FacebookDownloaderPage() {
   return (
     <>
-      <JsonLd data={webAppSchema} />
+      <JsonLd data={howToSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
 
       <section className="hero">
         <h1>Facebook Video Downloader</h1>
-        <p className="subtitle">
-          Download public Facebook videos &amp; Reels in HD — free, no login, works on all devices
-        </p>
+        <p className="subtitle">Download Facebook videos, Reels, and Live recordings in HD with no login.</p>
         <div className="input-section">
           <Downloader />
         </div>
       </section>
 
       <div className="main-content">
-        <h2 className="section-title">How to Download Facebook Videos Online</h2>
-        <p className="section-subtitle">Save any public Facebook video in three steps</p>
+        <BreadcrumbNav items={[{ label: "Home", href: "/" }, { label: "Facebook Downloader" }]} />
+
+        <h2 className="section-title">How to Download Facebook Videos</h2>
         <div className="steps-how">
           <div className="step-how">
             <div className="step-how-num">1</div>
-            <h3>Get the Facebook video URL</h3>
-            <p>On desktop, click the video timestamp to open it on its own page and copy the URL. On mobile, tap the three-dot menu on the post and choose "Copy link".</p>
+            <h3>Copy the Facebook URL</h3>
+            <p>Copy the video post URL from your browser or use the Copy Link option in the Facebook app.</p>
           </div>
           <div className="step-how">
             <div className="step-how-num">2</div>
             <h3>Paste into VidMick</h3>
-            <p>Paste the Facebook URL into the input above and click "Get Formats". VidMick will fetch all available quality options for that video.</p>
+            <p>Paste the URL in the input and click Get Formats to fetch all available options.</p>
           </div>
           <div className="step-how">
             <div className="step-how-num">3</div>
-            <h3>Choose quality and save</h3>
-            <p>Select SD or HD and click Download. The video saves directly to your device — no account or app required.</p>
+            <h3>Choose quality and download</h3>
+            <p>Select the quality you want and click Download to save the file directly to your device.</p>
           </div>
         </div>
 
         <section className="content-section">
-          <h2 className="section-title">The Easiest Way to Download Facebook Videos</h2>
+          <h2 className="section-title">Public Facebook Videos, Reels, and Live Recordings</h2>
           <p className="content-text">
-            VidMick makes downloading Facebook videos simple and fast. Whether it's a funny clip, a news segment, a sports highlight, or a Facebook Reel, you can save any public Facebook video to your device in seconds using just the video URL.
+            VidMick works with publicly accessible Facebook videos including Reels and completed Live recordings. Private or friends-only videos are not available to third-party download tools.
           </p>
           <p className="content-text">
-            VidMick works entirely in your browser — no extensions, no desktop apps, no sign-in. It's compatible with all major browsers on Android, iPhone, Windows, and Mac.
-          </p>
-
-          <h3 className="subsection-title">Download Facebook Reels</h3>
-          <p className="content-text">
-            Facebook Reels are short-form videos that can go viral fast. With VidMick, you can save any public Facebook Reel to your device by copying its link and pasting it above. Downloads are in HD at the original quality Facebook stores.
-          </p>
-
-          <h3 className="subsection-title">Download Facebook Videos on Android</h3>
-          <p className="content-text">
-            Open your Android browser, paste the Facebook video URL into VidMick, and tap Download. The video saves to your Downloads folder and appears in your gallery. No app needed.
-          </p>
-
-          <h3 className="subsection-title">Save Facebook Live Recordings</h3>
-          <p className="content-text">
-            Missed a live stream? If the broadcaster saved it as a public post, you can download the recording with VidMick after the stream ends. Just grab the post URL and paste it in.
+            Use the latest copied URL and fetch formats right before downloading, since source links may expire after a short window.
           </p>
         </section>
 
         <h2 className="section-title">Frequently Asked Questions</h2>
-        <p className="section-subtitle">Everything about downloading Facebook videos and Reels</p>
         <div className="faq-list">
-          {faqs.map((faq, i) => (
-            <FaqItem key={i} question={faq.q} answer={faq.a} />
+          {faqs.map((faq) => (
+            <FaqItem key={faq.q} question={faq.q} answer={faq.a} />
           ))}
         </div>
 
-        <div className="related-links">
-          <h3>Also Download From</h3>
-          <div className="related-grid">
-            <a href="/youtube-downloader" className="related-card">
-              <span>▶</span>
-              <div>
-                <strong>YouTube Downloader</strong>
-                <p>Save videos &amp; Shorts in 4K</p>
-              </div>
-            </a>
-            <a href="/instagram-downloader" className="related-card">
-              <span>📷</span>
-              <div>
-                <strong>Instagram Downloader</strong>
-                <p>Save Reels without watermark</p>
-              </div>
-            </a>
-          </div>
-        </div>
+        <RelatedDownloaders
+          links={[
+            {
+              href: "/youtube-downloader",
+              label: "YouTube Downloader",
+              description: "Download YouTube videos and Shorts in HD and 4K.",
+            },
+            {
+              href: "/instagram-downloader",
+              label: "Instagram Downloader",
+              description: "Save Instagram Reels and videos without watermark.",
+            },
+            {
+              href: "/tiktok-downloader",
+              label: "TikTok Downloader",
+              description: "Download TikTok videos and audio quickly.",
+            },
+          ]}
+        />
       </div>
 
-      <footer>
-        <div className="footer-links">
-          <a href="/">Home</a>
-          <a href="/youtube-downloader">YouTube Downloader</a>
-          <a href="/instagram-downloader">Instagram Downloader</a>
-          <a href="/facebook-downloader">Facebook Downloader</a>
-          <a href="/how-to-download-videos">How To</a>
-        </div>
-        <p>© {new Date().getFullYear()} VidMick. All rights reserved.</p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
