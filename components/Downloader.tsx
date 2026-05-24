@@ -55,7 +55,7 @@ function FormatCard({
           <span className="badge">{f.ext?.toUpperCase()}</span>
           <span className="badge">{type}</span>
           {needsMerge && <span className="badge merge-badge">+Audio merge</span>}
-          {!needsMerge && f.has_video && f.has_audio && platform !== "insta" && (
+          {!needsMerge && f.has_video && f.has_audio && platform !== "insta" && platform !== "fb" && (
             <span className="badge recommended-badge">Recommended</span>
           )}
         </span>
